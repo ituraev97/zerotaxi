@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# TODO: после привязки домена добавить строку Sitemap: https://<домен>/sitemap.xml

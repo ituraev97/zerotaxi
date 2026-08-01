@@ -1,0 +1,9 @@
+# Деплой без сборки: публикуется корень репозитория
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/uploads/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
