@@ -4,4 +4,4 @@ Allow: /
 # Служебные страницы Netlify Forms в индекс не нужны
 Disallow: /.netlify/
 
-Sitemap: https://zerotaxiplus.netlify.app/sitemap.xml
+Sitemap: https://zerotaxiplus.uz/sitemap.xml

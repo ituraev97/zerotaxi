@@ -15,7 +15,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const BASE = 'https://zerotaxiplus.netlify.app';
+const BASE = process.env.URL || 'https://zerotaxiplus.uz';
 const SRC = path.join(ROOT, 'index.html');
 const OUT = path.join(ROOT, 'uz', 'index.html');
 const T = JSON.parse(fs.readFileSync(path.join(__dirname, 'uz-translations.json'), 'utf8'));

@@ -169,10 +169,7 @@ node tools/build-og-image.js     # нужен playwright-core и Chromium
 
 - **Отправить `sitemap.xml` в Google Search Console и Яндекс Вебмастер.** Это главный
   оставшийся шаг: сам по себе новый сайт находится долго, а после добавления sitemap
-  обход начинается за дни. Адрес карты — `<домен>/sitemap.xml`.
-- **После привязки своего домена** заменить `https://zerotaxiplus.netlify.app` на него
-  в `canonical`, `og:url`, `og:image`, `hreflang` и `sitemap.xml`. Быстрее всего —
-  поиском по репозиторию; не забудьте потом пересобрать `uz/index.html`.
+  обход начинается за дни. Адрес карты — `https://zerotaxiplus.uz/sitemap.xml`.
 - Заменить градиентные обложки на фото парка, когда оно появится (см. раздел выше).
 
 ## Фотографии
