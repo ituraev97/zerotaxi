@@ -3,9 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Подключение к Яндекс Такси в Узбекистане — ZERO TAXI | Комиссия 2.5%</title>
-<meta name="description" content="Таксопарк ZERO TAXI — официальный партнёр Яндекс Такси (Yandex Go) в Узбекистане. Комиссия парка 2.5%, вывод на карту за секунды, поддержка 24/7. Подключение за 15 минут.">
+<title>Подключение к Яндекс Такси в Узбекистане — ZERO TAXI</title>
+<meta name="description" content="Официальный партнёр Яндекс Такси (Yandex Go) в Узбекистане. Комиссия парка 2.5%, вывод на карту за секунды, поддержка 24/7. Подключение за 15 минут.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="theme-color" content="#111111">
+<link rel="canonical" href="https://zerotaxiplus.netlify.app/">
+<meta property="og:url" content="https://zerotaxiplus.netlify.app/">
 <meta property="og:title" content="ZERO TAXI — таксопарк-партнёр Яндекс Go в Узбекистане">
 <meta property="og:description" content="Комиссия парка 2.5%, вывод на карту за секунды без комиссии, поддержка 24/7. Подключение за 15 минут.">
 <!-- TODO: заменить на реальное фото парка 1200×630 (JPG/PNG) и указать абсолютный URL после привязки домена -->
@@ -16,7 +19,7 @@
 <meta property="og:locale:alternate" content="uz_UZ">
 <meta property="og:site_name" content="ZERO TAXI">
 <meta name="twitter:card" content="summary_large_image">
-<!-- TODO: после привязки домена добавить <link rel="canonical">, <meta property="og:url">, robots.txt + sitemap.xml -->
+<!-- TODO: после привязки своего домена заменить https://zerotaxiplus.netlify.app на него в canonical, og:url и sitemap.xml -->
 <link rel="icon" href="uploads/zerotaxi-mark.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="uploads/zerotaxi-mark.svg">
 <script type="application/ld+json">
@@ -354,7 +357,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 
 /* ---------- футер ---------- */
 .footer{background:var(--ink);padding:70px 0 40px}
-.footer__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.12)}
+.footer__grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.12)}
 .footer__logo{display:flex;align-items:center;gap:12px;margin-bottom:18px}
 .footer__logo img{height:58px;width:auto}
 .footer__about{margin:0;max-width:38ch;font-size:15px;line-height:1.65;color:rgba(255,255,255,.55)}
@@ -378,6 +381,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 @media (max-width:1120px){
   .nav{display:none}
   .burger{display:inline-flex}
+  .footer__grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:900px){
   .hero__split,.calc,.req,.oil__split,.apply,.footer__grid{grid-template-columns:1fr}
@@ -417,6 +421,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
       <a href="#terms" data-i18n="nav3">Условия</a>
       <a href="#how" data-i18n="nav4">Как подключиться</a>
       <a href="#faq" data-i18n="nav5">FAQ</a>
+      <a href="/blog/" data-i18n="nav6">Блог</a>
     </nav>
 
     <div class="header__right">
@@ -438,6 +443,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
       <a href="#terms" data-mlink data-i18n="nav3">Условия</a>
       <a href="#how" data-mlink data-i18n="nav4">Как подключиться</a>
       <a href="#faq" data-mlink data-i18n="nav5">FAQ</a>
+      <a href="/blog/" data-mlink data-i18n="nav6">Блог</a>
       <a href="#apply" class="btn btn--yellow" data-mlink data-i18n="ctaShort">Подключиться</a>
     </div>
   </div>
@@ -967,6 +973,15 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
         <p class="footer__addr" data-i18n="footAddr">г. Ташкент, ул. Саракульская, 7/1</p>
         <p class="footer__hours" data-i18n="footHours">Работаем 24/7, без выходных и перерывов</p>
       </div>
+      <div>
+        <h3 data-i18n="footSections">Разделы</h3>
+        <div class="footer__links">
+          <a href="/blog/" data-i18n="footBlog">Блог для водителей</a>
+          <a href="#calculator" data-i18n="nav2">Калькулятор</a>
+          <a href="#faq" data-i18n="nav5">FAQ</a>
+          <a href="#apply" data-i18n="ctaShort">Подключиться</a>
+        </div>
+      </div>
     </div>
     <p class="footer__copy">© 2026 ZERO TAXI · Yandex Go Hamkor</p>
   </div>
@@ -1004,7 +1019,7 @@ var CONFIG = {
 
 /* Узбекский перевод. Ключ = data-i18n в разметке. Русский берётся из самой разметки. */
 var UZ = {
-  nav1:'Afzalliklar', nav2:'Kalkulyator', nav3:'Shartlar', nav4:'Qanday ulanish', nav5:'Savollar',
+  nav1:'Afzalliklar', nav2:'Kalkulyator', nav3:'Shartlar', nav4:'Qanday ulanish', nav5:'Savollar', nav6:'Blog',
   ctaShort:'Ulanish',
   heroBadge:'O\'zbekistonda Yandex Go rasmiy hamkori',
   heroTitle:'Zero Taxi\'da ishlang — ko\'proq daromad oling',
@@ -1086,6 +1101,7 @@ var UZ = {
   fSubmit:'Arizani yuborish', fNote:'Tugmani bosish orqali siz shaxsiy ma\'lumotlarni qayta ishlashga rozilik bildirasiz.',
 
   footContacts:'Kontaktlar', footOffice:'Ofis',
+  footSections:'Bo\'limlar', footBlog:'Haydovchilar uchun blog',
   footAbout:'O\'zbekistonda Yandex Go rasmiy hamkori. Haydovchilarni ulaymiz va 24/7 ishlaymiz.',
   footAddr:'Toshkent sh., Sarakul ko\'chasi, 7/1',
   footHours:'24/7 ishlaymiz, dam olish kunlarisiz'
