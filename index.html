@@ -421,7 +421,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
       <a href="#terms" data-i18n="nav3">Условия</a>
       <a href="#how" data-i18n="nav4">Как подключиться</a>
       <a href="#faq" data-i18n="nav5">FAQ</a>
-      <a href="/blog/" data-i18n="nav6">Блог</a>
+      <a href="/blog/" data-blog-link data-i18n="nav6">Блог</a>
     </nav>
 
     <div class="header__right">
@@ -443,7 +443,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
       <a href="#terms" data-mlink data-i18n="nav3">Условия</a>
       <a href="#how" data-mlink data-i18n="nav4">Как подключиться</a>
       <a href="#faq" data-mlink data-i18n="nav5">FAQ</a>
-      <a href="/blog/" data-mlink data-i18n="nav6">Блог</a>
+      <a href="/blog/" data-mlink data-blog-link data-i18n="nav6">Блог</a>
       <a href="#apply" class="btn btn--yellow" data-mlink data-i18n="ctaShort">Подключиться</a>
     </div>
   </div>
@@ -976,7 +976,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
       <div>
         <h3 data-i18n="footSections">Разделы</h3>
         <div class="footer__links">
-          <a href="/blog/" data-i18n="footBlog">Блог для водителей</a>
+          <a href="/blog/" data-blog-link data-i18n="footBlog">Блог для водителей</a>
           <a href="#calculator" data-i18n="nav2">Калькулятор</a>
           <a href="#faq" data-i18n="nav5">FAQ</a>
           <a href="#apply" data-i18n="ctaShort">Подключиться</a>
@@ -1207,6 +1207,10 @@ function applyLang(next){
   });
   $$('[data-lang]').forEach(function(b){
     b.classList.toggle('is-on', b.getAttribute('data-lang') === lang);
+  });
+  /* блог — отдельные страницы на каждом языке, ведём на нужную версию */
+  $$('[data-blog-link]').forEach(function(a){
+    a.setAttribute('href', lang === 'uz' ? '/uz/blog/' : '/blog/');
   });
   $$('[data-count]').forEach(function(el){
     var t = parseFloat(el.getAttribute('data-count'));

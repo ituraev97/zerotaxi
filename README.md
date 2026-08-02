@@ -7,12 +7,13 @@
 
 ```
 index.html      главная: HTML + CSS + JS в одном файле, без фреймворков и сборщика
-blog/           блог для водителей: index.html + по папке на статью
-blog/assets/    общий blog.css для всех страниц блога
+blog/           русский блог: index.html + по папке на статью
+blog/assets/    общий blog.css для всех страниц блога — и русских, и узбекских
+uz/blog/        узбекская версия блога, зеркало русской
 uploads/        логотип и знак в SVG + разбор фирменного стиля (README-brand.md)
 netlify.toml    конфиг деплоя (без сборки, публикуется корень)
 robots.txt      разрешает индексацию, ссылается на sitemap.xml
-sitemap.xml     все страницы сайта и блога
+sitemap.xml     все страницы сайта и блога, с hreflang-аннотациями
 ```
 
 ## Деплой на Netlify
@@ -81,15 +82,36 @@ var CONFIG = {
 `/blog/имя-статьи/` без `.html` и работает на любом хостинге. Стили общие,
 лежат в `blog/assets/blog.css` — правите один файл, меняются все статьи.
 
+Блог двуязычный: русская версия в `blog/`, узбекская — в `uz/blog/`. Это отдельные
+страницы с отдельными адресами (а не переключатель, как на главной), поэтому поисковики
+индексируют обе. Связаны они через `hreflang` — по три строки в `<head>` каждой страницы
+плюс аннотации в `sitemap.xml`.
+
+Слаги у языков разные, соответствие такое:
+
+| Русская статья | Узбекская |
+|---|---|
+| `kak-podklyuchitsya-k-yandeks-taksi-v-uzbekistane` | `yandex-taksiga-qanday-ulanish` |
+| `skolko-zarabatyvaet-taksist-v-uzbekistane` | `taksichi-qancha-ishlaydi` |
+| `komissiya-taksoparkov-v-uzbekistane` | `taksopark-komissiyasi` |
+| `samozanyatost-dlya-voditelya-taksi` | `haydovchi-mehnat-maqomi` |
+| `trebovaniya-k-avtomobilyu-v-yandeks-taksi` | `avtomobilga-talablar` |
+| `kak-vybrat-taksopark` | `taksoparkni-qanday-tanlash` |
+| `kak-zarabatyvat-bolshe-v-taksi` | `taksida-kop-ishlash` |
+
 Чтобы добавить статью:
 
 1. Скопируйте папку любой существующей статьи и переименуйте — имя папки станет адресом.
 2. В `<head>` поменяйте `<title>`, `description`, `canonical`, `og:*`, `twitter:*`
    и блок `application/ld+json` (`headline`, `description`, даты, `BreadcrumbList`, `FAQPage`).
-   Вопросы в `FAQPage` должны совпадать с текстом на странице слово в слово — иначе
-   Google не покажет расширенный сниппет.
-3. Добавьте карточку статьи в `blog/index.html` (в список `.posts` и в `ItemList` в JSON-LD).
-4. Добавьте URL в `sitemap.xml`.
+   Вопросы и ответы в `FAQPage` должны совпадать с текстом на странице слово в слово —
+   иначе Google не покажет расширенный сниппет.
+3. Сделайте вторую языковую версию и пропишите в обеих `hreflang` — три строки
+   (`ru`, `uz`, `x-default`) с одинаковыми адресами в обоих файлах. Ссылки должны быть
+   взаимными, иначе Google их проигнорирует.
+4. Добавьте карточку статьи в `blog/index.html` и `uz/blog/index.html`
+   (в список `.posts` и в `ItemList` в JSON-LD).
+5. Добавьте оба URL в `sitemap.xml` вместе с блоком `xhtml:link`.
 
 Полезные ориентиры: `<title>` до ~60 символов, `description` 150–160 символов,
 один `<h1>` на страницу, все `<h2>` продублированы в оглавлении `.toc`.
@@ -109,8 +131,11 @@ var CONFIG = {
   нужно реальное фото парка 1200×630 в JPG или PNG.
 - Отправить `sitemap.xml` в Google Search Console и Яндекс Вебмастер — без этого
   индексация новых статей идёт заметно дольше.
-- Узбекская версия главной переключается скриптом и отдельно не индексируется.
-  Для SEO на узбекском нужны отдельные страницы `/uz` и `/uz/blog/` с `hreflang`.
+- Блог уже двуязычный (`/blog/` и `/uz/blog/` связаны через `hreflang`), а вот **главная —
+  ещё нет**: узбекская версия переключается скриптом на том же URL, поэтому поисковики
+  индексируют только русский вариант. Чтобы закрыть это, нужна отдельная страница `/uz/`
+  с узбекским текстом в разметке и парой `hreflang` с корнем. Цена вопроса — две копии
+  лендинга, которые придётся держать в синхроне.
 
 ## Фотографии
 

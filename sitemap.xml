@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
+  <!-- Главная. Узбекская версия переключается скриптом на той же странице,
+       поэтому отдельного URL и hreflang у неё пока нет. -->
   <url>
     <loc>https://zerotaxiplus.netlify.app/</loc>
     <lastmod>2026-08-02</lastmod>
@@ -8,60 +11,152 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Русская версия блога -->
   <url>
     <loc>https://zerotaxiplus.netlify.app/blog/</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/"/>
   </url>
-
   <url>
     <loc>https://zerotaxiplus.netlify.app/blog/kak-podklyuchitsya-k-yandeks-taksi-v-uzbekistane/</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/kak-podklyuchitsya-k-yandeks-taksi-v-uzbekistane/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/yandex-taksiga-qanday-ulanish/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/kak-podklyuchitsya-k-yandeks-taksi-v-uzbekistane/"/>
   </url>
-
   <url>
     <loc>https://zerotaxiplus.netlify.app/blog/skolko-zarabatyvaet-taksist-v-uzbekistane/</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/skolko-zarabatyvaet-taksist-v-uzbekistane/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/taksichi-qancha-ishlaydi/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/skolko-zarabatyvaet-taksist-v-uzbekistane/"/>
   </url>
-
   <url>
     <loc>https://zerotaxiplus.netlify.app/blog/komissiya-taksoparkov-v-uzbekistane/</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/komissiya-taksoparkov-v-uzbekistane/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/taksopark-komissiyasi/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/komissiya-taksoparkov-v-uzbekistane/"/>
   </url>
-
   <url>
     <loc>https://zerotaxiplus.netlify.app/blog/samozanyatost-dlya-voditelya-taksi/</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/samozanyatost-dlya-voditelya-taksi/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/haydovchi-mehnat-maqomi/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/samozanyatost-dlya-voditelya-taksi/"/>
   </url>
-
   <url>
     <loc>https://zerotaxiplus.netlify.app/blog/trebovaniya-k-avtomobilyu-v-yandeks-taksi/</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/trebovaniya-k-avtomobilyu-v-yandeks-taksi/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/avtomobilga-talablar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/trebovaniya-k-avtomobilyu-v-yandeks-taksi/"/>
   </url>
-
   <url>
     <loc>https://zerotaxiplus.netlify.app/blog/kak-vybrat-taksopark/</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/kak-vybrat-taksopark/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/taksoparkni-qanday-tanlash/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/kak-vybrat-taksopark/"/>
   </url>
-
   <url>
     <loc>https://zerotaxiplus.netlify.app/blog/kak-zarabatyvat-bolshe-v-taksi/</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/kak-zarabatyvat-bolshe-v-taksi/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/taksida-kop-ishlash/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/kak-zarabatyvat-bolshe-v-taksi/"/>
+  </url>
+
+  <!-- Узбекская версия блога -->
+  <url>
+    <loc>https://zerotaxiplus.netlify.app/uz/blog/</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/"/>
+  </url>
+  <url>
+    <loc>https://zerotaxiplus.netlify.app/uz/blog/yandex-taksiga-qanday-ulanish/</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/kak-podklyuchitsya-k-yandeks-taksi-v-uzbekistane/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/yandex-taksiga-qanday-ulanish/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/kak-podklyuchitsya-k-yandeks-taksi-v-uzbekistane/"/>
+  </url>
+  <url>
+    <loc>https://zerotaxiplus.netlify.app/uz/blog/taksichi-qancha-ishlaydi/</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/skolko-zarabatyvaet-taksist-v-uzbekistane/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/taksichi-qancha-ishlaydi/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/skolko-zarabatyvaet-taksist-v-uzbekistane/"/>
+  </url>
+  <url>
+    <loc>https://zerotaxiplus.netlify.app/uz/blog/taksopark-komissiyasi/</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/komissiya-taksoparkov-v-uzbekistane/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/taksopark-komissiyasi/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/komissiya-taksoparkov-v-uzbekistane/"/>
+  </url>
+  <url>
+    <loc>https://zerotaxiplus.netlify.app/uz/blog/haydovchi-mehnat-maqomi/</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/samozanyatost-dlya-voditelya-taksi/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/haydovchi-mehnat-maqomi/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/samozanyatost-dlya-voditelya-taksi/"/>
+  </url>
+  <url>
+    <loc>https://zerotaxiplus.netlify.app/uz/blog/avtomobilga-talablar/</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/trebovaniya-k-avtomobilyu-v-yandeks-taksi/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/avtomobilga-talablar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/trebovaniya-k-avtomobilyu-v-yandeks-taksi/"/>
+  </url>
+  <url>
+    <loc>https://zerotaxiplus.netlify.app/uz/blog/taksoparkni-qanday-tanlash/</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/kak-vybrat-taksopark/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/taksoparkni-qanday-tanlash/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/kak-vybrat-taksopark/"/>
+  </url>
+  <url>
+    <loc>https://zerotaxiplus.netlify.app/uz/blog/taksida-kop-ishlash/</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerotaxiplus.netlify.app/blog/kak-zarabatyvat-bolshe-v-taksi/"/>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://zerotaxiplus.netlify.app/uz/blog/taksida-kop-ishlash/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerotaxiplus.netlify.app/blog/kak-zarabatyvat-bolshe-v-taksi/"/>
   </url>
 
 </urlset>
