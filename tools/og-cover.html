@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+  Шаблон обложки для соцсетей и поисковой выдачи (og:image), 1200×630.
+  Из него собраны uploads/og-cover-ru.png и uploads/og-cover-uz.png.
+
+  Пересобрать после правок:
+    python3 -m http.server 8899          # из корня репозитория
+    node tools/build-og-image.js         # нужен playwright-core и Chromium
+
+  Либо вручную: открыть в браузере с ?lang=ru или ?lang=uz,
+  выставить окно 1200×630 и снять скриншот.
+-->
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>OG cover</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{font-family:Poppins,"DejaVu Sans",system-ui,sans-serif;background:#111}
+  .card{position:relative;width:1200px;height:630px;overflow:hidden;
+    background:
+      radial-gradient(120% 90% at 88% 6%,rgba(247,198,75,.22),transparent 58%),
+      radial-gradient(90% 85% at 10% 100%,rgba(63,169,184,.45),transparent 62%),
+      linear-gradient(115deg,#111111 0%,#12232A 42%,rgba(44,130,144,.92) 80%,rgba(63,169,184,.9) 100%)}
+  /* та же сетка, что в hero на сайте */
+  .grid{position:absolute;inset:0;opacity:.2;
+    background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(120% 90% at 72% 28%,#000 18%,transparent 74%)}
+  .glow{position:absolute;left:-180px;bottom:-220px;width:620px;height:620px;border-radius:50%;
+    background:radial-gradient(circle,rgba(63,169,184,.42),transparent 68%)}
+  .inner{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;
+    gap:34px;padding:0 78px}
+  .logo{align-self:flex-start;height:104px;width:auto;filter:drop-shadow(0 18px 40px rgba(0,0,0,.45))}
+  .tagline{font-size:40px;line-height:1.24;font-weight:700;color:#fff;letter-spacing:-.02em;max-width:24ch}
+  .stats{display:flex;gap:16px;flex-wrap:wrap}
+  .chip{display:flex;flex-direction:column;gap:3px;background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.24);border-radius:20px;padding:16px 26px}
+  .chip b{font-size:36px;font-weight:800;color:#F7C64B;letter-spacing:-.02em;line-height:1}
+  .chip span{font-size:16px;font-weight:500;color:rgba(255,255,255,.76)}
+  .mark{position:absolute;right:-40px;top:50%;transform:translateY(-50%);width:400px;opacity:.16}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="grid"></div>
+    <div class="glow"></div>
+    <img class="mark" src="/uploads/zerotaxi-mark.svg" alt="">
+    <div class="inner">
+      <img class="logo" src="/uploads/zerotaxi-logo-horizontal-white.svg" alt="ZERO TAXI">
+      <p class="tagline" data-tagline></p>
+      <div class="stats" data-stats></div>
+    </div>
+  </div>
+<script>
+var TEXT = {
+  ru: {
+    tagline: 'Таксопарк — официальный партнёр Yandex Go в Узбекистане',
+    stats: [['2.5%','комиссия парка'],['0%','за вывод на карту'],['24/7','поддержка водителей']]
+  },
+  uz: {
+    tagline: "Taksopark — O'zbekistonda Yandex Go rasmiy hamkori",
+    stats: [['2.5%','park komissiyasi'],['0%','kartaga yechish'],['24/7',"qo'llab-quvvatlash"]]
+  }
+};
+var lang = new URLSearchParams(location.search).get('lang') === 'uz' ? 'uz' : 'ru';
+var t = TEXT[lang];
+document.documentElement.lang = lang;
+document.querySelector('[data-tagline]').textContent = t.tagline;
+document.querySelector('[data-stats]').innerHTML = t.stats
+  .map(function(s){ return '<div class="chip"><b>' + s[0] + '</b><span>' + s[1] + '</span></div>'; })
+  .join('');
+</script>
+</body>
+</html>
