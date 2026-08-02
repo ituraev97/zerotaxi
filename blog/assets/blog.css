@@ -71,7 +71,7 @@ a:hover{color:var(--teal)}
 .pcard__art{height:132px;position:relative;overflow:hidden;
   background:linear-gradient(120deg,#3FA9B8 0%,#1B3A42 60%,#111111 100%)}
 .pcard__art::before{content:"";position:absolute;inset:0;
-  background:radial-gradient(80% 120% at 80% 12%,rgba(247,198,75,.28),transparent 62%)}
+  background:radial-gradient(80% 120% at 80% 12%,rgba(255,255,255,.16),transparent 62%)}
 .pcard__art::after{content:"";position:absolute;inset:0;opacity:.3;
   background-image:
     linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),

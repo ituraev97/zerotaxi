@@ -233,9 +233,10 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .steps-wrap{position:relative}
 .steps-line{position:absolute;left:0;right:0;top:34px;height:2px;background:linear-gradient(90deg,var(--teal),rgba(63,169,184,.15))}
 .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px;position:relative}
-.steps__num{display:flex;align-items:center;justify-content:center;width:68px;height:68px;border-radius:22px;background:var(--ink);color:var(--yellow);
-  font-size:26px;font-weight:800;margin-bottom:22px;box-shadow:0 12px 26px rgba(17,17,17,.2)}
-.steps li:last-child .steps__num{background:var(--teal);color:#fff;box-shadow:0 12px 26px rgba(63,169,184,.35)}
+/* все четыре номера одинаковые: раньше последний выбивался бирюзовым из трёх тёмных */
+.steps__num{display:flex;align-items:center;justify-content:center;width:68px;height:68px;border-radius:22px;
+  background:var(--teal);color:#fff;
+  font-size:26px;font-weight:800;margin-bottom:22px;box-shadow:0 12px 26px rgba(63,169,184,.35)}
 .steps h3{margin:0 0 8px;font-size:19px;font-weight:700;color:var(--ink)}
 .steps p{margin:0;font-size:15px;line-height:1.6;color:var(--text-mid)}
 
@@ -254,8 +255,9 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 /* Шапка карточки. Фото парка нет и не планируется — вместо заглушки тот же приём,
    что в hero: градиент бренда, мягкое свечение и сетка под радиальной маской. */
 .req__banner{position:relative;height:190px;overflow:hidden;
+  /* блик светлый, а не жёлтый: жёлтый поверх бирюзового даёт грязный оливковый */
   background:
-    radial-gradient(90% 130% at 85% 4%,rgba(247,198,75,.22),transparent 58%),
+    radial-gradient(90% 130% at 85% 4%,rgba(255,255,255,.16),transparent 58%),
     linear-gradient(120deg,#4FBFCE 0%,#2C8290 30%,#1B3A42 66%,#111111 100%)}
 .req__banner::before{content:"";position:absolute;inset:0;opacity:.3;
   background-image:
@@ -292,12 +294,13 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .oil__art{position:relative;min-height:360px;overflow:hidden;
   /* начинается бирюзовым, чтобы не было шва с секцией, и уходит в тёмный */
   background:
-    radial-gradient(100% 90% at 82% 8%,rgba(247,198,75,.22),transparent 58%),
-    radial-gradient(80% 90% at 4% 96%,rgba(255,255,255,.14),transparent 60%),
+    radial-gradient(100% 90% at 82% 8%,rgba(255,255,255,.16),transparent 58%),
+    radial-gradient(80% 90% at 4% 96%,rgba(255,255,255,.12),transparent 60%),
     linear-gradient(110deg,#4FBFCE 0%,#2C8290 34%,#17343C 78%,#111111 100%)}
-.oil__art::before{content:"";position:absolute;right:-140px;top:-160px;
-  width:460px;height:460px;border-radius:50%;
-  background:radial-gradient(circle,rgba(247,198,75,.22),transparent 68%)}
+/* тёплый блик держим в тёмной части, где он не мутит бирюзовый */
+.oil__art::before{content:"";position:absolute;right:-120px;bottom:-140px;
+  width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(247,198,75,.16),transparent 68%)}
 .oil__art::after{content:"";position:absolute;inset:0;opacity:.3;
   background-image:
     linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
