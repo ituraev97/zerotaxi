@@ -261,21 +261,22 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .req__card--dark h3{color:#fff}
 .req__card--dark .req__list li{color:rgba(255,255,255,.86)}
 .req__card--dark .req__tick{background:rgba(247,198,75,.2);color:var(--yellow)}
-/* Шапка карточки. Фото парка нет и не планируется, поэтому это не заглушка под
-   картинку, а самостоятельная панель: градиент бренда + знак водяным знаком + сетка. */
+/* Шапка карточки. Фото парка нет и не планируется — вместо заглушки тот же приём,
+   что в hero: градиент бренда, мягкое свечение и сетка под радиальной маской. */
 .req__banner{position:relative;height:190px;overflow:hidden;
   background:
-    radial-gradient(85% 130% at 88% 6%,rgba(247,198,75,.26),transparent 58%),
-    linear-gradient(120deg,#3FA9B8 0%,#1B3A42 56%,#111111 100%)}
-.req__banner::before{content:"";position:absolute;right:-26px;top:50%;
-  transform:translateY(-50%) rotate(-8deg);width:180px;height:180px;opacity:.18;
-  background:url(/uploads/zerotaxi-mark.svg) center/contain no-repeat}
-.req__banner::after{content:"";position:absolute;inset:0;
+    radial-gradient(90% 130% at 85% 4%,rgba(247,198,75,.22),transparent 58%),
+    linear-gradient(120deg,#4FBFCE 0%,#2C8290 30%,#1B3A42 66%,#111111 100%)}
+.req__banner::before{content:"";position:absolute;inset:0;opacity:.3;
   background-image:
-    linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px),
-    linear-gradient(180deg,rgba(17,17,17,0) 38%,rgba(17,17,17,.94) 100%);
-  background-size:48px 48px,48px 48px,auto}
+    linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+  background-size:52px 52px;
+  -webkit-mask-image:radial-gradient(120% 100% at 62% 24%,#000 16%,transparent 78%);
+          mask-image:radial-gradient(120% 100% at 62% 24%,#000 16%,transparent 78%)}
+/* затемнение снизу — под него заезжает заголовок карточки */
+.req__banner::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(17,17,17,0) 38%,rgba(17,17,17,.94) 100%)}
 .req__body{padding:28px 34px 34px;margin-top:-52px;position:relative}
 .req__note{margin:22px 0 0;font-size:14px;line-height:1.6;color:rgba(255,255,255,.55)}
 
@@ -296,24 +297,24 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
   box-shadow:0 0 20px rgba(247,198,75,.7);transition:width 1.6s var(--ease)}
 .oil__done{margin-top:14px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--ink);
   background:var(--yellow);padding:8px 15px;border-radius:99px}
-/* Правая половина блока. Фото автосервиса не будет, поэтому здесь оформленная
-   панель, а не пустое место: градиент, знак бренда и та же сетка, что в hero. */
+/* Правая половина блока. Фото автосервиса не будет — здесь тот же приём, что в
+   hero: градиент, свечение в углу и сетка под радиальной маской. Без логотипа. */
 .oil__art{position:relative;min-height:360px;overflow:hidden;
+  /* начинается бирюзовым, чтобы не было шва с секцией, и уходит в тёмный */
   background:
-    radial-gradient(85% 75% at 78% 20%,rgba(247,198,75,.32),transparent 62%),
-    radial-gradient(70% 90% at 12% 100%,rgba(255,255,255,.16),transparent 58%),
-    linear-gradient(120deg,#4FBFCE 0%,#2C8290 44%,#16333A 100%)}
-.oil__art::before{content:"";position:absolute;left:50%;top:50%;
-  transform:translate(-50%,-50%) rotate(-8deg);width:300px;height:300px;max-width:62%;opacity:.2;
-  background:url(/uploads/zerotaxi-mark.svg) center/contain no-repeat;
-  filter:drop-shadow(0 20px 44px rgba(0,0,0,.4))}
-.oil__art::after{content:"";position:absolute;inset:0;
+    radial-gradient(100% 90% at 82% 8%,rgba(247,198,75,.22),transparent 58%),
+    radial-gradient(80% 90% at 4% 96%,rgba(255,255,255,.14),transparent 60%),
+    linear-gradient(110deg,#4FBFCE 0%,#2C8290 34%,#17343C 78%,#111111 100%)}
+.oil__art::before{content:"";position:absolute;right:-140px;top:-160px;
+  width:460px;height:460px;border-radius:50%;
+  background:radial-gradient(circle,rgba(247,198,75,.22),transparent 68%)}
+.oil__art::after{content:"";position:absolute;inset:0;opacity:.3;
   background-image:
-    linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
-  background-size:56px 56px;
-  -webkit-mask-image:radial-gradient(115% 90% at 65% 35%,#000 18%,transparent 76%);
-          mask-image:radial-gradient(115% 90% at 65% 35%,#000 18%,transparent 76%)}
+    linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+  background-size:60px 60px;
+  -webkit-mask-image:radial-gradient(120% 95% at 62% 32%,#000 18%,transparent 78%);
+          mask-image:radial-gradient(120% 95% at 62% 32%,#000 18%,transparent 78%)}
 
 /* ---------- отзывы ---------- */
 .slider{max-width:820px;margin:0 auto;overflow:hidden;border-radius:20px}

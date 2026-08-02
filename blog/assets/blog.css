@@ -66,19 +66,19 @@ a:hover{color:var(--teal)}
 .pcard{display:flex;flex-direction:column;background:#fff;border:1.5px solid var(--line);border-radius:20px;overflow:hidden;
   transition:transform .4s var(--ease),border-color .35s,box-shadow .35s}
 .pcard:hover{transform:translateY(-6px);border-color:var(--teal);box-shadow:0 20px 44px rgba(63,169,184,.16)}
-/* Обложка карточки. Фотографий у статей нет, поэтому это не заглушка, а
-   оформленная плашка: градиент бренда, знак водяным знаком и сетка как в hero. */
+/* Обложка карточки. Фотографий у статей нет — тот же приём, что в hero на главной:
+   градиент бренда, свечение и сетка под радиальной маской. Без логотипа. */
 .pcard__art{height:132px;position:relative;overflow:hidden;
   background:linear-gradient(120deg,#3FA9B8 0%,#1B3A42 60%,#111111 100%)}
-.pcard__art::before{content:"";position:absolute;right:-22px;top:50%;
-  transform:translateY(-50%) rotate(-8deg);width:130px;height:130px;opacity:.2;
-  background:url(/uploads/zerotaxi-mark.svg) center/contain no-repeat}
-.pcard__art::after{content:"";position:absolute;inset:0;
+.pcard__art::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(80% 120% at 80% 12%,rgba(247,198,75,.28),transparent 62%)}
+.pcard__art::after{content:"";position:absolute;inset:0;opacity:.3;
   background-image:
-    linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px),
-    radial-gradient(70% 80% at 78% 22%,rgba(247,198,75,.3),transparent 62%);
-  background-size:40px 40px,40px 40px,auto}
+    linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+  background-size:44px 44px;
+  -webkit-mask-image:radial-gradient(120% 100% at 66% 26%,#000 16%,transparent 80%);
+          mask-image:radial-gradient(120% 100% at 66% 26%,#000 16%,transparent 80%)}
 /* три варианта заливки, чтобы карточки в ленте не выглядели одинаково */
 .pcard:nth-child(3n+2) .pcard__art{background:linear-gradient(120deg,#F7C64B 0%,#C98F1F 55%,#111111 100%)}
 .pcard:nth-child(3n) .pcard__art{background:linear-gradient(120deg,#2C8290 0%,#16333A 55%,#111111 100%)}
