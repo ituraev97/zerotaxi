@@ -362,9 +362,10 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .form{background:var(--gray);border-radius:20px;padding:34px;box-shadow:0 18px 44px rgba(17,17,17,.06)}
 .form__row{margin-bottom:20px}
 .form__label{display:block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-soft);margin-bottom:9px}
-.form input[type=text],.form input[type=tel]{width:100%;font-family:inherit;font-size:16px;padding:16px 18px;border-radius:14px;
+.form input[type=text],.form input[type=tel],.form textarea{width:100%;font-family:inherit;font-size:16px;padding:16px 18px;border-radius:14px;
   border:1.5px solid var(--line-2);background:#fff;color:var(--ink);transition:border-color .3s,box-shadow .3s}
-.form input[type=text]:focus,.form input[type=tel]:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px rgba(63,169,184,.14)}
+.form textarea{resize:vertical;min-height:90px}
+.form input[type=text]:focus,.form input[type=tel]:focus,.form textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px rgba(63,169,184,.14)}
 .form input.is-error{border-color:#D9534F}
 .form__err{display:none;margin-top:7px;font-size:13px;color:#D9534F;font-weight:500}
 .form__err.is-on{display:block}
@@ -946,11 +947,8 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
           </div>
         </div>
 
-        <form class="form" data-form name="zero-taxi" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-reveal data-delay="80">
-          <input type="hidden" name="form-name" value="zero-taxi">
-          <!-- заполняется скриптом: по адресу видно, с русской версии заявка или с /uz/ -->
-          <input type="hidden" name="page" value="" data-page-field>
-          <p class="hp"><label>To'ldirmang: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <form class="form" data-form data-reveal data-delay="80">
+          <p class="hp"><label>To'ldirmang: <input name="bot_field" tabindex="-1" autocomplete="off" data-hp></label></p>
 
           <div class="form__row">
             <label class="form__label" for="zt-name" data-i18n="fName">Ism</label>
@@ -971,6 +969,11 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
               <label class="radio"><input type="radio" name="car" value="rent"><span data-i18n="carRent">Ijara kerak</span></label>
             </div>
           </fieldset>
+
+          <div class="form__row">
+            <label class="form__label" for="zt-comment" data-i18n="fComment">Izoh</label>
+            <textarea id="zt-comment" name="comment" rows="3" placeholder="Shart emas" data-ph="phComment"></textarea>
+          </div>
 
           <button type="submit" class="btn btn--yellow" data-i18n="fSubmit">Arizani yuborish</button>
           <p class="form__note" data-i18n="fNote">Tugmani bosish orqali siz shaxsiy ma'lumotlarni qayta ishlashga rozilik bildirasiz.</p>
@@ -1053,8 +1056,8 @@ var FEE_LABEL = {
 };
 
 var ERR = {
-  ru:{ name:'Введите имя', phone:'Введите номер в формате +998 97 403 51 51', ok:'Заявка отправлена. Перезвоним в течение 10 минут.', fail:'Не удалось отправить. Позвоните нам или напишите в Telegram.' },
-  uz:{ name:'Ismingizni kiriting', phone:'Raqamni +998 97 403 51 51 formatida kiriting', ok:'Ariza yuborildi. 10 daqiqa ichida qo\'ng\'iroq qilamiz.', fail:'Yuborib bo\'lmadi. Bizga qo\'ng\'iroq qiling yoki Telegramga yozing.' }
+  ru:{ name:'Введите имя', phone:'Введите номер в формате +998 97 403 51 51', sending:'Отправка…', ok:'Заявка отправлена. Перезвоним в течение 10 минут.', fail:'Не удалось отправить. Позвоните нам или напишите в Telegram.' },
+  uz:{ name:'Ismingizni kiriting', phone:'Raqamni +998 97 403 51 51 formatida kiriting', sending:'Yuborilmoqda…', ok:'Ariza yuborildi. 10 daqiqa ichida qo\'ng\'iroq qilamiz.', fail:'Yuborib bo\'lmadi. Bizga qo\'ng\'iroq qiling yoki Telegramga yozing.' }
 };
 
 var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1338,7 +1341,8 @@ function maskPhone(input){
 
 function onSubmit(e){
   var form = e.target;
-  var name = $('#zt-name'), phone = $('#zt-phone'), ok = $('[data-form-ok]');
+  var name = $('#zt-name'), phone = $('#zt-phone'), comment = $('#zt-comment');
+  var hp = $('[data-hp]', form), ok = $('[data-form-ok]'), btn = $('button[type="submit"]', form);
   var t = ERR[lang] || ERR.ru;
   var showErr = function(key, msg){
     var el = $('[data-err="' + key + '"]');
@@ -1354,32 +1358,45 @@ function onSubmit(e){
   e.preventDefault();
   if (!valid) return;
 
-  /* с какой страницы заявка — уходит в Telegram вместе с именем и телефоном */
-  var pageField = $('[data-page-field]', form);
-  if (pageField) pageField.value = location.pathname;
-
   var done = function(msg){
     ok.textContent = msg;
     ok.classList.add('is-on');
     setTimeout(function(){ ok.classList.remove('is-on'); }, 6000);
   };
 
-  /* локальный просмотр файла — просто показываем успех */
+  /* локальный просмотр файла — сети нет, просто показываем успех */
   if (location.protocol === 'file:'){ form.reset(); syncRadios(); done(t.ok); return; }
 
-  /* Netlify Forms: отправляем без перезагрузки страницы */
-  var data = new URLSearchParams(new FormData(form)).toString();
-  fetch(location.pathname, {
+  var carEl = form.querySelector('input[name="car"]:checked');
+  var payload = {
+    name: name.value.trim(),
+    phone: phone.value,
+    car: carEl ? carEl.value : '',
+    comment: comment ? comment.value.trim() : '',
+    bot_field: hp ? hp.value : ''
+  };
+
+  var submitText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = t.sending;
+
+  fetch('/.netlify/functions/lead', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: data
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
   }).then(function(res){
-    if (!res.ok) throw new Error(res.status);
+    return res.json().catch(function(){ return {}; }).then(function(data){
+      if (!res.ok || !data.ok) throw new Error((data && data.error) || String(res.status));
+    });
+  }).then(function(){
     form.reset();
     syncRadios();
     done(t.ok);
   }).catch(function(){
     done(t.fail);
+  }).then(function(){
+    btn.disabled = false;
+    btn.textContent = submitText;
   });
 }
 

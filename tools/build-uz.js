@@ -33,7 +33,7 @@ h = h.replace(/(<([a-z0-9]+)\b[^>]*\bdata-i18n="([^"]+)"[^>]*>)([\s\S]*?)(<\/\2>
   });
 
 /* ---------- 2. Плейсхолдеры по data-ph ---------- */
-h = h.replace(/(<input\b[^>]*\bdata-ph="([^"]+)"[^>]*>)/g, (all, el, key) => {
+h = h.replace(/(<(?:input|textarea)\b[^>]*\bdata-ph="([^"]+)"[^>]*>)/g, (all, el, key) => {
   const uz = T.keys[key];
   if (uz === undefined) { missing.push(key); return all; }
   return el.replace(/placeholder="[^"]*"/, 'placeholder="' + uz + '"');
