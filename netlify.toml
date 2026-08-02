@@ -3,6 +3,12 @@
   publish = "."
   command = ""
 
+# Функция submission-created пересылает заявки из Netlify Forms в Telegram.
+# Секреты (TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID) заданы в настройках проекта
+# на Netlify, в репозитории их нет и быть не должно.
+[functions]
+  directory = "netlify/functions"
+
 [[headers]]
   for = "/uploads/*"
   [headers.values]

@@ -944,6 +944,8 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 
         <form class="form" data-form name="zero-taxi" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-reveal data-delay="80">
           <input type="hidden" name="form-name" value="zero-taxi">
+          <!-- заполняется скриптом: по адресу видно, с русской версии заявка или с /uz/ -->
+          <input type="hidden" name="page" value="" data-page-field>
           <p class="hp"><label>To'ldirmang: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 
           <div class="form__row">
@@ -1333,6 +1335,10 @@ function onSubmit(e){
 
   e.preventDefault();
   if (!valid) return;
+
+  /* с какой страницы заявка — уходит в Telegram вместе с именем и телефоном */
+  var pageField = $('[data-page-field]', form);
+  if (pageField) pageField.value = location.pathname;
 
   var done = function(msg){
     ok.textContent = msg;
