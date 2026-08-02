@@ -98,8 +98,12 @@ h1,h2,h3{letter-spacing:-.025em}
 .btn--sm{font-size:15px;padding:13px 22px;border-radius:13px}
 .btn--lg{font-size:17px;padding:19px 34px;border-radius:15px;box-shadow:0 14px 34px rgba(247,198,75,.4)}
 .btn--lg:hover{box-shadow:0 20px 44px rgba(247,198,75,.6)}
-.btn--glass{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.42);color:#fff;font-size:17px;font-weight:600;
-  padding:19px 34px;border-radius:15px;backdrop-filter:blur(6px)}
+/* Без backdrop-filter намеренно. На мобильных кнопки идут в столбик, и жёлтая
+   тень кнопки выше ложится прямо на эту. Safari на iOS во время анимации появления
+   пересчитывает backdrop-filter по ещё не скомпонованному слою и на кадр-другой
+   заливает кнопку жёлтым. Прозрачности фона хватает, чтобы стекло читалось. */
+.btn--glass{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.42);color:#fff;font-size:17px;font-weight:600;
+  padding:19px 34px;border-radius:15px}
 .btn--glass:hover{transform:translateY(-3px);background:rgba(255,255,255,.16);border-color:var(--teal);color:#fff}
 
 /* ---------- хедер ---------- */
