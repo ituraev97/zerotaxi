@@ -13,6 +13,7 @@ blog/assets/    общий blog.css для всех страниц блога �
 uz/blog/        узбекская версия блога, зеркало русской
 tools/          сборщик узбекской главной и генератор обложек для соцсетей
 uploads/        логотипы, знак и обложки og-cover-*.jpg (+ README-brand.md)
+netlify/functions/lead.mjs   приём заявки с сайта, отправка в Telegram
 netlify.toml    конфиг деплоя (без сборки, публикуется корень)
 robots.txt      разрешает индексацию, ссылается на sitemap.xml
 sitemap.xml     все 18 страниц с hreflang-аннотациями
@@ -26,10 +27,46 @@ Netlify его не запускает.
 Сборка не нужна. В Netlify: **Add new site → Import from Git → этот репозиторий**.
 Build command оставить пустым, publish directory — корень (`.`). Это уже прописано в `netlify.toml`.
 
-Форма заявки работает через **Netlify Forms**: у формы есть `data-netlify="true"`,
-скрытое поле `form-name` и honeypot `bot-field`. Заявки появятся в разделе
-**Forms** в панели Netlify сразу после первого деплоя. Уведомления на почту
-включаются там же: Forms → Settings → Form notifications.
+Форма заявки отправляется напрямую в Telegram через Netlify Function
+`netlify/functions/lead.mjs` (эндпоинт `/.netlify/functions/lead`), Netlify Forms
+не используется. Нужно задать переменные окружения проекта — см. раздел
+«Заявки в Telegram» ниже.
+
+## Заявки в Telegram
+
+Форма шлёт `fetch('/.netlify/functions/lead', ...)` с JSON `{name, phone, car, comment}`.
+Функция валидирует номер (должен приводиться к `+998XXXXXXXXX`), режет спам
+honeypot-полем и rate-limit по IP, и пересылает заявку в Telegram через Bot API.
+
+**Переменные окружения** (обязательны, без них функция вернёт 500):
+
+- `TELEGRAM_BOT_TOKEN` — токен бота от [@BotFather](https://t.me/BotFather).
+- `TELEGRAM_CHAT_ID` — куда слать: личный chat id (узнать у [@userinfobot](https://t.me/userinfobot))
+  или `-100...` для группы/канала.
+
+Задаются в панели Netlify: **Project configuration → Environment variables → Add a variable**
+(или Site configuration → Environment variables в старом интерфейсе). После сохранения
+нужен redeploy, чтобы функция увидела новые значения. Локально — скопируйте
+`.env.example` в `.env` и впишите те же значения; `.env` в git не попадает.
+
+**Проверка локально:**
+
+```
+npm install -g netlify-cli   # если ещё не стоит
+netlify dev
+```
+
+Откроет сайт на `http://localhost:8888` с работающими функциями (Netlify CLI
+сам подхватывает `.env` из корня проекта). Отправьте заявку через форму на
+странице или напрямую:
+
+```
+curl -X POST http://localhost:8888/.netlify/functions/lead \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Тест","phone":"+998 90 123 45 67","car":"own","comment":"проверка"}'
+```
+
+Ответ `{"ok":true}` и сообщение в Telegram-чате — значит всё настроено верно.
 
 ## Как править содержимое
 
