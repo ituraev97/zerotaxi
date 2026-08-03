@@ -72,7 +72,7 @@
   --ease:cubic-bezier(.22,1,.36,1);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%;overflow-x:hidden}
 body{margin:0;font-family:Poppins,system-ui,sans-serif;color:var(--ink);background:var(--white);text-wrap:pretty;overflow-x:hidden}
 img{max-width:100%}
 a{color:var(--teal);text-decoration:none}
@@ -412,7 +412,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .footer__copy{margin:26px 0 0;font-size:14px;color:rgba(255,255,255,.4)}
 
 /* ---------- плавающая кнопка ---------- */
-.fab{position:fixed;right:22px;bottom:22px;z-index:70;width:60px;height:60px;border-radius:20px;background:var(--teal);display:flex;
+.fab{position:fixed;right:22px;bottom:22px;bottom:max(22px, calc(22px + env(safe-area-inset-bottom)));z-index:70;width:60px;height:60px;border-radius:20px;background:var(--teal);display:flex;
   align-items:center;justify-content:center;box-shadow:0 14px 34px rgba(63,169,184,.5);opacity:0;visibility:hidden;
   transform:translateY(20px) scale(.9);transition:opacity .4s var(--ease),transform .4s var(--ease),box-shadow .35s}
 .fab.is-on{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
