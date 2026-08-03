@@ -5,7 +5,7 @@
  */
 (function () {
   var YM_COUNTER_ID = 111268041; // Яндекс.Метрика — zerotaxiplus.uz
-  var FB_PIXEL_ID = '3718434111728514'; // Meta Pixel — zerotaxiplus.uz
+  var FB_PIXEL_ID = '662407543088182'; // Meta Pixel — zerotaxiplus.uz
   var h = location.hostname;
   if (h === 'localhost' || h === '127.0.0.1' || h === '0.0.0.0' || h === '[::1]' || h === '') return;
 
