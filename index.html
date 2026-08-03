@@ -1140,14 +1140,27 @@ function setupHeader(){
   var header = $('[data-header]');
   var menu = $('[data-mobile-menu]');
   var fab = $('[data-fab]');
+  var heroActions = $('.hero__actions');
+  var updateFab = function(){
+    if (!fab) return;
+    fab.classList.add('is-on');
+    fab.style.bottom = '';
+    if (heroActions) {
+      var f = fab.getBoundingClientRect(), h = heroActions.getBoundingClientRect();
+      var overlaps = f.left < h.right && f.right > h.left && f.top < h.bottom && f.bottom > h.top;
+      if (overlaps) fab.style.bottom = (window.innerHeight - h.top + 14) + 'px';
+    }
+  };
   var onScroll = function(){
     var solid = menu.classList.contains('is-open') || window.scrollY > 40;
     header.classList.toggle('is-solid', solid);
-    if (fab) fab.classList.toggle('is-on', window.scrollY > window.innerHeight * 0.75);
+    updateFab();
   };
   window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('resize', updateFab, { passive:true });
   window.__ztScroll = onScroll;
   onScroll();
+  updateFab();
 }
 
 function toggleMenu(force){
