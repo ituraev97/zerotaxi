@@ -1,5 +1,6 @@
 /**
- * Принимает заявку с сайта (POST JSON) и пересылает её в Telegram.
+ * Принимает заявку с сайта (POST JSON), пересылает её в Telegram и отправляет
+ * серверное событие Lead в Meta Conversions API.
  *
  * Заменяет Netlify Forms: форма на странице шлёт сюда fetch напрямую,
  * без form-name/data-netlify и без промежуточной submission-created.
@@ -11,7 +12,9 @@
  *
  *   TELEGRAM_BOT_TOKEN — токен от @BotFather
  *   TELEGRAM_CHAT_ID   — куда слать: личный id, или -100... для группы/канала
+ *   META_PIXEL_ID, META_CAPI_TOKEN, META_TEST_EVENT_CODE — см. .env.example
  */
+import { createHash } from 'node:crypto';
 
 const CAR = {
   own: 'своя машина',
@@ -118,6 +121,57 @@ async function sendToTelegram(text) {
   return { ok: true };
 }
 
+/* ---------- Meta Conversions API ---------- */
+
+function hashField(value) {
+  return createHash('sha256').update(String(value).trim().toLowerCase()).digest('hex');
+}
+
+function metaClientIp(event) {
+  const headers = event.headers || {};
+  return headers['x-nf-client-connection-ip'] || headers['client-ip'];
+}
+
+async function sendLeadToMetaCapi({ name, phone, eventId, pageUrl, fbp, fbc, clientIp, userAgent }) {
+  const pixelId = process.env.META_PIXEL_ID;
+  const token = process.env.META_CAPI_TOKEN;
+  if (!pixelId || !token || !eventId) return;
+
+  const userData = {
+    ph: hashField(phone.replace(/\D/g, '')),
+    fn: hashField(name),
+  };
+  if (clientIp) userData.client_ip_address = clientIp;
+  if (userAgent) userData.client_user_agent = userAgent;
+  if (fbp) userData.fbp = fbp;
+  if (fbc) userData.fbc = fbc;
+
+  const payload = {
+    data: [{
+      event_name: 'Lead',
+      event_time: Math.floor(Date.now() / 1000),
+      event_id: eventId,
+      action_source: 'website',
+      event_source_url: pageUrl || 'https://zerotaxiplus.uz/',
+      user_data: userData,
+    }],
+  };
+  if (process.env.META_TEST_EVENT_CODE) payload.test_event_code = process.env.META_TEST_EVENT_CODE;
+
+  const res = await fetch(
+    `https://graph.facebook.com/v21.0/${pixelId}/events?access_token=${token}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    },
+  );
+  if (!res.ok) {
+    const body = await res.text().catch(() => '');
+    console.error('Meta CAPI отклонил событие:', res.status, body);
+  }
+}
+
 const json = (statusCode, data) => ({
   statusCode,
   headers: { 'Content-Type': 'application/json; charset=utf-8' },
@@ -160,6 +214,18 @@ export const handler = async (event) => {
   if (!result.ok) {
     return json(result.status, { ok: false, error: result.error });
   }
+
+  // Аналитика не должна ломать ответ водителю: любая ошибка Meta гасится здесь.
+  await sendLeadToMetaCapi({
+    name,
+    phone,
+    eventId: payload.eventId,
+    pageUrl: payload.pageUrl,
+    fbp: payload.fbp,
+    fbc: payload.fbc,
+    clientIp: metaClientIp(event),
+    userAgent: (event.headers || {})['user-agent'],
+  }).catch((err) => console.error('Meta CAPI недоступен:', err.message));
 
   return json(200, { ok: true });
 };
